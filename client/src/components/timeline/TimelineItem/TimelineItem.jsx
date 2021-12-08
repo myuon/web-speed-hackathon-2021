@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import 'moment/locale/ja';
 
 import { getProfileImagePath } from '../../../utils/get_path';
 import { ImageArea } from '../../post/ImageArea';
