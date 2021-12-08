@@ -51,7 +51,6 @@ const CoveredImage = ({ alt, src }) => {
           'w-full h-auto': containerRatio <= imageRatio,
         })}
         src={blobUrl}
-        loading="lazy"
         decoding="async"
       />
     </div>
