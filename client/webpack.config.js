@@ -52,6 +52,7 @@ const config = {
   },
   output: {
     filename: 'scripts/[name].js',
+    chunkFilename: 'scripts/[id].js',
     path: DIST_PATH,
   },
   plugins: [
@@ -88,6 +89,7 @@ const config = {
   },
   optimization: {
     splitChunks: {
+      name: 'vendor',
       chunks: 'all',
       cacheGroups: {
         vendors: false,
