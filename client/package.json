@@ -70,5 +70,6 @@
     "ignorePackages": [
       "core-js"
     ]
-  }
+  },
+  "browserslist": "last 1 Chrome versions"
 }
