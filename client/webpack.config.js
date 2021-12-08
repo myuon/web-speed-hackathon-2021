@@ -87,6 +87,14 @@ const config = {
       path: false,
     },
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: false,
+      },
+    },
+  },
 };
 
 module.exports = config;
