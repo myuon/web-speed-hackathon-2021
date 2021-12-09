@@ -43,10 +43,6 @@ const SoundPlayer = ({ sound }) => {
     });
   }, []);
 
-  if (isLoading || data === null || blobUrl === null) {
-    return null;
-  }
-
   return (
     <div className="flex items-center justify-center w-full h-full bg-gray-300">
       <audio ref={audioRef} loop={true} onTimeUpdate={handleTimeUpdate} src={blobUrl} />
