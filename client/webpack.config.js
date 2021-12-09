@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const SRC_PATH = path.resolve(__dirname, './src');
 const PUBLIC_PATH = path.resolve(__dirname, '../public');
@@ -93,7 +94,7 @@ const config = {
         vendors: false,
       },
     },
-    minimizer: [new CssMinimizerPlugin()],
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
   },
 };
 
