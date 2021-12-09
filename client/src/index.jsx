@@ -47,6 +47,11 @@ window.addEventListener('load', () => {
   );
 
   setTimeout(() => {
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('href', '/styles/webfont.css');
+    document.head.appendChild(link);
+
     document.querySelector('html').classList.add('loaded');
   }, 1);
 });
