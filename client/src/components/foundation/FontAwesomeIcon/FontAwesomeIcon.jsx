@@ -1,4 +1,5 @@
 import React from 'react';
+import { FontAwesomeIcon as ReactFontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /**
  * @typedef {object} Props
@@ -10,7 +11,7 @@ import React from 'react';
 const FontAwesomeIcon = ({ iconType, styleType }) => {
   return (
     <svg className="font-awesome inline-block leading-none fill-current">
-      <use xlinkHref={`/sprites/font-awesome/${styleType}.svg#${iconType}`} />
+      <ReactFontAwesomeIcon icon={[styleType === 'solid' ? 'fas' : 'far', iconType]}></ReactFontAwesomeIcon>
     </svg>
   );
 };
