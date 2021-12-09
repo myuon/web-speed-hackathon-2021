@@ -4,9 +4,11 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import './styles/webfont.css';
+html {
+  font-family: sans-serif;
+}
 
-body {
+html.loaded {
   font-family: '源暎エムゴ', sans-serif;
 }
 

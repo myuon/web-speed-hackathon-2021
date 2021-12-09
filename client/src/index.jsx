@@ -45,4 +45,8 @@ window.addEventListener('load', () => {
     </BrowserRouter>,
     document.getElementById('app'),
   );
+
+  setTimeout(() => {
+    document.querySelector('html').classList.add('loaded');
+  }, 1);
 });
