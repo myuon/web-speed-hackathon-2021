@@ -1,6 +1,4 @@
 import React from 'react';
-import { useCallback } from 'react';
-import { useReducer } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { InfiniteScroll } from '../../components/foundation/InfiniteScroll';

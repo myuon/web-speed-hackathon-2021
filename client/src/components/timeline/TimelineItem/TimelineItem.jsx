@@ -1,7 +1,6 @@
-import moment from 'moment';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import 'moment/locale/ja';
+import dayjs from 'dayjs';
 
 import { getProfileImagePath } from '../../../utils/get_path';
 import { ImageArea } from '../../post/ImageArea';
@@ -71,8 +70,8 @@ const TimelineItem = ({ post }) => {
             </Link>
             <span className="pr-1 text-gray-500">-</span>
             <Link className="pr-1 text-gray-500 hover:underline" to={`/posts/${post.id}`}>
-              <time dateTime={moment(post.createdAt).toISOString()}>
-                {moment(post.createdAt).locale('ja').format('LL')}
+              <time dateTime={dayjs(post.createdAt).toISOString()}>
+                {dayjs(post.createdAt).format('YYYY年MM月DD日')}
               </time>
             </Link>
           </p>
