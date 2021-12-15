@@ -6,6 +6,10 @@ import React from 'react';
  * @returns {Promise<{ max: number, peaks: number[] }}
  */
 async function calculate(data) {
+  if (!data) {
+    return;
+  }
+
   const audioCtx = new AudioContext();
 
   // 音声をデコードする
