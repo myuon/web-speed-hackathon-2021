@@ -1,6 +1,4 @@
 import classNames from 'classnames';
-import { Animator, Decoder } from 'gifler';
-import { GifReader } from 'omggif';
 import React from 'react';
 
 import { useFetch } from '../../../hooks/use_fetch';
@@ -24,12 +22,15 @@ const PausableMovie = ({ src }) => {
   const animatorRef = React.useRef(null);
   /** @type {React.RefCallback<HTMLCanvasElement>} */
   const canvasCallbackRef = React.useCallback(
-    (el) => {
+    async (el) => {
       animatorRef.current?.stop();
 
       if (el === null || data === null) {
         return;
       }
+
+      const { Animator, Decoder } = await import('gifler');
+      const { GifReader } = await import('omggif');
 
       // GIF を解析する
       const reader = new GifReader(new Uint8Array(data));
