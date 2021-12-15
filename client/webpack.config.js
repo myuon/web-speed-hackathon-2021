@@ -89,13 +89,6 @@ const config = {
     },
   },
   optimization: {
-    splitChunks: {
-      name: 'vendor',
-      chunks: 'all',
-      cacheGroups: {
-        vendors: false,
-      },
-    },
     minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
   },
 };

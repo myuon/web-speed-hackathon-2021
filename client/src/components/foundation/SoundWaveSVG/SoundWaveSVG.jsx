@@ -7,7 +7,7 @@ import React from 'react';
  */
 async function calculate(data) {
   if (!data) {
-    return;
+    return { max: 0, peaks: [] };
   }
 
   const audioCtx = new AudioContext();
