@@ -29,8 +29,12 @@ const PausableMovie = ({ src }) => {
         return;
       }
 
-      const { Animator, Decoder } = await import('gifler');
-      const { GifReader } = await import('omggif');
+      const {
+        default: { Animator, Decoder },
+      } = await import(/* webpackPrefetch: true*/ 'gifler');
+      const {
+        default: { GifReader },
+      } = await import(/* webpackPrefetch: true*/ 'omggif');
 
       // GIF を解析する
       const reader = new GifReader(new Uint8Array(data));

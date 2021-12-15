@@ -17,7 +17,6 @@ const TimelineContainer = () => {
     },
     LIMIT,
   );
-  console.log(posts);
 
   return (
     <InfiniteScroll fetchMore={fetchMore} items={posts}>
