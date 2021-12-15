@@ -1,7 +1,5 @@
 import React from 'react';
 
-const LIMIT = 10;
-
 /**
  * @template T
  * @typedef {object} ReturnValues
@@ -17,7 +15,7 @@ const LIMIT = 10;
  * @param {(apiPath: string) => Promise<T[]>} fetcher
  * @returns {ReturnValues<T>}
  */
-export function useInfiniteFetch(apiPath, fetcher) {
+export function useInfiniteFetch(apiPath, fetcher, LIMIT) {
   const internalRef = React.useRef({ isLoading: false, offset: 0 });
 
   const [result, setResult] = React.useState({
@@ -41,12 +39,12 @@ export function useInfiniteFetch(apiPath, fetcher) {
       offset,
     };
 
-    const promise = fetcher(apiPath);
+    const promise = fetcher(apiPath, offset);
 
     promise.then((allData) => {
       setResult((cur) => ({
         ...cur,
-        data: [...cur.data, ...allData.slice(offset, offset + LIMIT)],
+        data: [...cur.data, ...allData],
         isLoading: false,
       }));
       internalRef.current = {
@@ -66,7 +64,7 @@ export function useInfiniteFetch(apiPath, fetcher) {
         offset,
       };
     });
-  }, [apiPath, fetcher]);
+  }, [apiPath]);
 
   React.useEffect(() => {
     setResult(() => ({
