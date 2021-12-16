@@ -57,10 +57,12 @@ const AppContainer = () => {
         </Suspense>
       </AppPage>
 
-      {modalType === 'auth' ? (
-        <AuthModalContainer onRequestCloseModal={handleRequestCloseModal} onUpdateActiveUser={setActiveUser} />
-      ) : null}
-      {modalType === 'post' ? <NewPostModalContainer onRequestCloseModal={handleRequestCloseModal} /> : null}
+      <Suspense fallback={<>...</>}>
+        {modalType === 'auth' ? (
+          <AuthModalContainer onRequestCloseModal={handleRequestCloseModal} onUpdateActiveUser={setActiveUser} />
+        ) : null}
+        {modalType === 'post' ? <NewPostModalContainer onRequestCloseModal={handleRequestCloseModal} /> : null}
+      </Suspense>
     </>
   );
 };
