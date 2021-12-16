@@ -4,7 +4,11 @@
  */
 async function fetchBinary(url) {
   const response = await fetch(url);
-  return await response.arrayBuffer();
+  if (response.ok) {
+    return await response.arrayBuffer();
+  } else {
+    return null;
+  }
 }
 
 /**
@@ -28,15 +32,18 @@ async function fetchJSON(url) {
  * @returns {Promise<T>}
  */
 async function sendFile(url, file) {
-  return await (
-    await fetch(url, {
-      body: file,
-      headers: {
-        'Content-Type': 'application/octet-stream',
-      },
-      method: 'POST',
-    })
-  ).json();
+  const response = await fetch(url, {
+    body: file,
+    headers: {
+      'Content-Type': 'application/octet-stream',
+    },
+    method: 'POST',
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    return null;
+  }
 }
 
 /**
@@ -51,17 +58,19 @@ async function sendJSON(url, data) {
   const { gzip } = await import('pako');
   const compressed = gzip(uint8Array);
 
-  const result = await (
-    await fetch(url, {
-      body: compressed,
-      headers: {
-        'Content-Encoding': 'gzip',
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    })
-  ).json();
-  return result;
+  const response = await fetch(url, {
+    body: compressed,
+    headers: {
+      'Content-Encoding': 'gzip',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    return null;
+  }
 }
 
 export { fetchBinary, fetchJSON, sendFile, sendJSON };
