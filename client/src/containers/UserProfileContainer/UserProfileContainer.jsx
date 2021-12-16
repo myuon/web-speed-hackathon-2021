@@ -9,12 +9,20 @@ import { useInfiniteFetch } from '../../hooks/use_infinite_fetch';
 import { fetchJSON } from '../../utils/fetchers';
 import NotFoundContainer from '../NotFoundContainer';
 
+const LIMIT = 10;
+
 /** @type {React.VFC} */
 const UserProfileContainer = () => {
   const { username } = useParams();
 
   const { data: user, isLoading: isLoadingUser } = useFetch(`/api/v1/users/${username}`, fetchJSON);
-  const { data: posts, fetchMore } = useInfiniteFetch(`/api/v1/users/${username}/posts`, fetchJSON);
+  const { data: posts, fetchMore } = useInfiniteFetch(
+    `/api/v1/users/${username}/posts?limit=${LIMIT}`,
+    (url, offset) => {
+      return fetchJSON(`${url}&offset=${offset}`);
+    },
+    LIMIT,
+  );
 
   if (isLoadingUser) {
     return (
