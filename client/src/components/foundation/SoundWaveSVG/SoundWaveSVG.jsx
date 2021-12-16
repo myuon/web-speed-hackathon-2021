@@ -1,5 +1,14 @@
-import { map, zip, mean, chunk, max as maxlo } from 'lodash-es';
 import React from 'react';
+
+const runWorker = async (worker, data) => {
+  worker.postMessage(data);
+
+  return await new Promise((resolve) => {
+    worker.onmessage = ({ data }) => {
+      resolve(data);
+    };
+  });
+};
 
 /**
  * @param {ArrayBuffer} data
@@ -17,21 +26,13 @@ async function calculate(data) {
   const buffer = await new Promise((resolve, reject) => {
     audioCtx.decodeAudioData(data.slice(0), resolve, reject);
   });
-  // 左の音声データの絶対値を取る
-  const leftData = map(buffer.getChannelData(0), Math.abs);
-  // 右の音声データの絶対値を取る
-  const rightData = map(buffer.getChannelData(1), Math.abs);
 
-  // 左右の音声データの平均を取る
-  const normalized = map(zip(leftData, rightData), mean);
-  // 100 個の chunk に分ける
-  const chunks = chunk(normalized, Math.ceil(normalized.length / 100));
-  // chunk ごとに平均を取る
-  const peaks = map(chunks, mean);
-  // chunk の平均の中から最大値を取る
-  const max = maxlo(peaks);
+  const worker = new Worker(new URL('./worker.js', import.meta.url));
 
-  return { max, peaks };
+  return await runWorker(worker, {
+    channelLeft: buffer.getChannelData(0),
+    channelRight: buffer.getChannelData(1),
+  });
 }
 
 /**
